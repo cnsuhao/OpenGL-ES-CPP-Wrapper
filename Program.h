@@ -40,7 +40,7 @@ namespace gl
   class Program : public Object
   {
     public:
-      void Generate()
+      void Create()
       {
         mId = ::glCreateProgram();
       }

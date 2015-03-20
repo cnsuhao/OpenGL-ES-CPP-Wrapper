@@ -51,7 +51,7 @@ namespace gl
         ::glGetShaderPrecisionFormat(type, precisiontype, range, precision);
       }
 
-      void Generate()
+      void Create()
       {
         mId = ::glCreateShader(type);
       }
