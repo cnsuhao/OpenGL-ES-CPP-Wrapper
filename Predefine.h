@@ -37,16 +37,31 @@
 
 #if __cplusplus >= 201103L
 #include <array>
-#endif //
+#endif // __cplusplus
 
 namespace gl {
 
+// you can change the default String to one compatible with std::string
 typedef std::string String;
 
 #if __cplusplus >= 201103L
+// the typedefs below are compatible with GLSL vector types
+typedef std::array<GLfloat, 2> vec2;
+typedef std::array<GLfloat, 3> vec3;
+typedef std::array<GLfloat, 4> vec4;
+
 typedef std::array<GLint, 2> ivec2;
 typedef std::array<GLint, 3> ivec3;
-#endif
+typedef std::array<GLint, 4> ivec4;
+
+typedef std::array<GLboolean, 2> bvec2;
+typedef std::array<GLboolean, 3> bvec3;
+typedef std::array<GLboolean, 4> bvec4;
+
+typedef std::array<vec2, 2> mat2;
+typedef std::array<vec3, 3> mat3;
+typedef std::array<vec4, 4> mat4;
+#endif // __cplusplus
 
 } // namespace gl
 

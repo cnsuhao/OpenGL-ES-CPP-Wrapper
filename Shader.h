@@ -50,6 +50,12 @@ namespace gl
       {
         ::glGetShaderPrecisionFormat(type, precisiontype, range, precision);
       }
+      
+      Shader() : Object() {}
+
+      explicit Shader(GLuint id) : Object(id) {}
+
+      virtual ~Shader() {}
 
       void Create()
       {

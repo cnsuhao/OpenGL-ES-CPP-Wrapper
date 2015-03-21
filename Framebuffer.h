@@ -42,6 +42,12 @@ namespace gl
   class Framebuffer : public Object
   {
     public:
+      Framebuffer() : Object() {}
+      
+      explicit Framebuffer(GLuint id) : Object(id) {}
+      
+      virtual ~Framebuffer() {}
+      
       void Generate()
       {
         ::glGenFramebuffers(1, &mId);

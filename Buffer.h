@@ -41,6 +41,12 @@ namespace gl
   class Buffer : public Object
   {
     public:
+      Buffer() : Object() {}
+      
+      explicit Buffer(GLuint id) : Object(id) {}
+      
+      virtual ~Buffer() {}
+      
       void Generate()
       {
         ::glGenBuffers(1, &mId);

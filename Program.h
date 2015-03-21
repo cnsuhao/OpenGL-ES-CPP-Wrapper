@@ -40,6 +40,12 @@ namespace gl
   class Program : public Object
   {
     public:
+      Program() : Object() {}
+
+      explicit Program(GLuint id) : Object(id) {}
+
+      virtual ~Program() {}
+      
       void Create()
       {
         mId = ::glCreateProgram();

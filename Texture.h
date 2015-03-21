@@ -45,6 +45,12 @@ namespace gl
       {
         ::glActiveTexture(texture);
       }
+      
+      Texture() : Object() {}
+
+      explicit Texture(GLuint id) : Object(id) {}
+
+      virtual ~Texture() {}
 
       void Generate()
       {

@@ -40,6 +40,12 @@ namespace gl
   class Renderbuffer : public Object
   {
     public:
+      Renderbuffer() : Object() {}
+
+      explicit Renderbuffer(GLuint id) : Object(id) {}
+
+      virtual ~Renderbuffer() {}
+      
       void Generate()
       {
         ::glGenRenderbuffers(1, &mId);
