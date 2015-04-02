@@ -28,11 +28,11 @@
 // TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
 // USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GLESWRAPPER_PROGRAM_H
-#define GLESWRAPPER_PROGRAM_H
+#ifndef GLESWRAPPER_CORE_PROGRAM_H
+#define GLESWRAPPER_CORE_PROGRAM_H
 
 #include "Predefine.h"
-#include "Object.h"
+#include "core/Object.h"
 
 namespace gl
 {
@@ -45,7 +45,7 @@ namespace gl
       explicit Program(GLuint id) : Object(id) {}
 
       virtual ~Program() {}
-      
+
       void Create()
       {
         mId = ::glCreateProgram();
@@ -136,4 +136,4 @@ namespace gl
 
 } // namespace gl
 
-#endif // GLESWRAPPER_PROGRAM_H
+#endif // GLESWRAPPER_CORE_PROGRAM_H

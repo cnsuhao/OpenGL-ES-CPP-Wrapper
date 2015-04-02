@@ -28,11 +28,11 @@
 // TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
 // USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GLESWRAPPER_SHADER_H
-#define GLESWRAPPER_SHADER_H
+#ifndef GLESWRAPPER_CORE_SHADER_H
+#define GLESWRAPPER_CORE_SHADER_H
 
 #include "Predefine.h"
-#include "Object.h"
+#include "core/Object.h"
 
 namespace gl
 {
@@ -50,7 +50,7 @@ namespace gl
       {
         ::glGetShaderPrecisionFormat(type, precisiontype, range, precision);
       }
-      
+
       Shader() : Object() {}
 
       explicit Shader(GLuint id) : Object(id) {}
@@ -115,4 +115,4 @@ namespace gl
 
 } // namespace gl
 
-#endif // GLESWRAPPER_SHADER_H
+#endif // GLESWRAPPER_CORE_SHADER_H

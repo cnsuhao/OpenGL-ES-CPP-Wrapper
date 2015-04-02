@@ -28,52 +28,69 @@
 // TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
 // USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GLESWRAPPER_RENDERBUFFER_H
-#define GLESWRAPPER_RENDERBUFFER_H
+#ifndef GLESWRAPPER_CORE_FRAMEBUFFER_H
+#define GLESWRAPPER_CORE_FRAMEBUFFER_H
 
 #include "Predefine.h"
-#include "Object.h"
+#include "core/Object.h"
+#include "core/Texture.h"
+#include "core/Renderbuffer.h"
 
 namespace gl
 {
 
-  class Renderbuffer : public Object
+  class Framebuffer : public Object
   {
     public:
-      Renderbuffer() : Object() {}
+      Framebuffer() : Object() {}
 
-      explicit Renderbuffer(GLuint id) : Object(id) {}
+      explicit Framebuffer(GLuint id) : Object(id) {}
 
-      virtual ~Renderbuffer() {}
-      
+      virtual ~Framebuffer() {}
+
       void Generate()
       {
-        ::glGenRenderbuffers(1, &mId);
+        ::glGenFramebuffers(1, &mId);
       }
 
       void Delete()
       {
-        ::glDeleteRenderbuffers(1, &mId);
+        ::glDeleteFramebuffers(1, &mId);
         mId = 0;
       }
 
       inline void Bind() const
       {
-        ::glBindRenderbuffer(GL_RENDERBUFFER, mId);
+        ::glBindFramebuffer(GL_FRAMEBUFFER, mId);
       }
 
-      inline void SetStorage(GLenum internalformat, GLsizei width, GLsizei height)
+      inline void Attach(GLenum attachment, const Renderbuffer& rb)
       {
-        ::glRenderbufferStorage(GL_RENDERBUFFER, internalformat, width, height);
+        ::glFramebufferRenderbuffer(GL_FRAMEBUFFER, attachment, GL_RENDERBUFFER, rb.GetId());
       }
 
-      inline void GetParameter(GLenum pname, GLint* param) const
+      inline void Attach(GLenum attachment, const Texture2D& texture, GLint level)
       {
-        ::glGetRenderbufferParameteriv(GL_RENDERBUFFER, pname, param);
+        ::glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, GL_TEXTURE_2D, texture.GetId(), level);
       }
 
-  }; // class Renderbuffer
+      inline void Attach(GLenum attachment, GLenum textarget, const TextureCubeMap& texture, GLint level)
+      {
+        ::glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, textarget, texture.GetId(), level);
+      }
+
+      inline GLenum CheckStatus() const
+      {
+        return ::glCheckFramebufferStatus(GL_FRAMEBUFFER);
+      }
+
+      inline void GetAttachmentParameter(GLenum attachment, GLenum pname, GLint* param) const
+      {
+        ::glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, attachment, pname, param);
+      }
+
+  }; // class Framebuffer
 
 } // namespace gl
 
-#endif // GLESWRAPPER_RENDERBUFFER_H
+#endif // GLESWRAPPER_CORE_FRAMEBUFFER_H

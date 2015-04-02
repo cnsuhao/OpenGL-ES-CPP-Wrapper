@@ -28,66 +28,39 @@
 // TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
 // USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GLESWRAPPER_BUFFER_H
-#define GLESWRAPPER_BUFFER_H
+#ifndef GLESWRAPPER_CORE_PRIMITIVE_H
+#define GLESWRAPPER_CORE_PRIMITIVE_H
 
 #include "Predefine.h"
-#include "Object.h"
 
 namespace gl
 {
 
-  template<GLenum target>
-  class Buffer : public Object
+  template<GLenum mode>
+  struct Primitive
   {
-    public:
-      Buffer() : Object() {}
-      
-      explicit Buffer(GLuint id) : Object(id) {}
-      
-      virtual ~Buffer() {}
-      
-      void Generate()
-      {
-        ::glGenBuffers(1, &mId);
-      }
 
-      void Delete()
-      {
-        ::glDeleteBuffers(1, &mId);
-        mId = 0;
-      }
+    inline static void DrawArray(GLint first, GLsizei count)
+    {
+      ::glDrawArrays(mode, first, count);
+    }
 
-      inline void Bind() const
-      {
-        ::glBindBuffer(target, mId);
-      }
+    inline static void DrawElement(GLsizei count, GLenum type, const GLvoid* index)
+    {
+      ::glDrawElements(mode, count, type, index);
+    }
 
-      inline void SetData(GLsizeiptr size, const GLvoid* data, GLenum usage)
-      {
-        ::glBufferData(target, size, data, usage);
-      }
+  }; // struct Primitive
 
-      inline void SetData(GLsizeiptr size, GLenum usage)
-      {
-        SetData(size, 0, usage);
-      }
-
-      inline void SetSubData(GLintptr offset, GLsizeiptr size, const GLvoid* data)
-      {
-        ::glBufferSubData(target, offset, size, data);
-      }
-
-      inline void GetParameter(GLenum value, GLint* data) const
-      {
-        ::glGetBufferParameteriv(target, value, data);
-      }
-
-  }; //class Buffer
-
-  typedef Buffer<GL_ARRAY_BUFFER> ArrayBuffer;
-  typedef Buffer<GL_ELEMENT_ARRAY_BUFFER> ElementBuffer;
+  typedef Primitive<GL_POINTS> Point;
+  typedef Primitive<GL_LINES> Line;
+  typedef Primitive<GL_LINE_STRIP> LineStrip;
+  typedef Primitive<GL_LINE_LOOP> LineLoop;
+  typedef Primitive<GL_TRIANGLES> Triangle;
+  typedef Primitive<GL_TRIANGLE_STRIP> TriangleStrip;
+  typedef Primitive<GL_TRIANGLE_FAN> TriangleFan;
 
 } // namespace gl
 
-#endif // GLESWRAPPER_BUFFER_H
+#endif // GLESWRAPPER_CORE_PRIMITIVE_H
+

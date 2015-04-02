@@ -31,16 +31,18 @@
 #ifndef GLESWRAPPER_H
 #define GLESWRAPPER_H
 
-#include "Object.h"
-#include "Buffer.h"
-#include "Texture.h"
-#include "Uniform.h"
-#include "Attribute.h"
-#include "Shader.h"
-#include "Program.h"
-#include "Renderbuffer.h"
-#include "Framebuffer.h"
-#include "Primitive.h"
-#include "Context.h"
+#include "Predefine.h"
+
+#include "core/Object.h"
+#include "core/Buffer.h"
+#include "core/Texture.h"
+#include "core/Uniform.h"
+#include "core/Attribute.h"
+#include "core/Shader.h"
+#include "core/Program.h"
+#include "core/Renderbuffer.h"
+#include "core/Framebuffer.h"
+#include "core/Primitive.h"
+#include "core/Context.h"
 
 #endif //GLESWRAPPER_H

@@ -28,11 +28,11 @@
 // TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
 // USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GLESWRAPPER_TEXTURE_H
-#define GLESWRAPPER_TEXTURE_H
+#ifndef GLESWRAPPER_CORE_TEXTURE_H
+#define GLESWRAPPER_CORE_TEXTURE_H
 
 #include "Predefine.h"
-#include "Object.h"
+#include "core/Object.h"
 
 namespace gl
 {
@@ -45,7 +45,7 @@ namespace gl
       {
         ::glActiveTexture(texture);
       }
-      
+
       Texture() : Object() {}
 
       explicit Texture(GLuint id) : Object(id) {}
@@ -150,4 +150,4 @@ namespace gl
 
 } // namespace gl
 
-#endif // GLESWRAPPER_TEXTURE_H
+#endif // GLESWRAPPER_CORE_TEXTURE_H

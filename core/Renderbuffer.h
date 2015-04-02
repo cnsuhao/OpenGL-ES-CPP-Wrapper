@@ -28,39 +28,52 @@
 // TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
 // USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GLESWRAPPER_PRIMITIVE_H
-#define GLESWRAPPER_PRIMITIVE_H
+#ifndef GLESWRAPPER_CORE_RENDERBUFFER_H
+#define GLESWRAPPER_CORE_RENDERBUFFER_H
 
 #include "Predefine.h"
+#include "core/Object.h"
 
 namespace gl
 {
 
-  template<GLenum mode>
-  struct Primitive
+  class Renderbuffer : public Object
   {
+    public:
+      Renderbuffer() : Object() {}
 
-    inline static void DrawArray(GLint first, GLsizei count)
-    {
-      ::glDrawArrays(mode, first, count);
-    }
+      explicit Renderbuffer(GLuint id) : Object(id) {}
 
-    inline static void DrawElement(GLsizei count, GLenum type, const GLvoid* index)
-    {
-      ::glDrawElements(mode, count, type, index);
-    }
+      virtual ~Renderbuffer() {}
 
-  }; // struct Primitive
+      void Generate()
+      {
+        ::glGenRenderbuffers(1, &mId);
+      }
 
-  typedef Primitive<GL_POINTS> Point;
-  typedef Primitive<GL_LINES> Line;
-  typedef Primitive<GL_LINE_STRIP> LineStrip;
-  typedef Primitive<GL_LINE_LOOP> LineLoop;
-  typedef Primitive<GL_TRIANGLES> Triangle;
-  typedef Primitive<GL_TRIANGLE_STRIP> TriangleStrip;
-  typedef Primitive<GL_TRIANGLE_FAN> TriangleFan;
+      void Delete()
+      {
+        ::glDeleteRenderbuffers(1, &mId);
+        mId = 0;
+      }
+
+      inline void Bind() const
+      {
+        ::glBindRenderbuffer(GL_RENDERBUFFER, mId);
+      }
+
+      inline void SetStorage(GLenum internalformat, GLsizei width, GLsizei height)
+      {
+        ::glRenderbufferStorage(GL_RENDERBUFFER, internalformat, width, height);
+      }
+
+      inline void GetParameter(GLenum pname, GLint* param) const
+      {
+        ::glGetRenderbufferParameteriv(GL_RENDERBUFFER, pname, param);
+      }
+
+  }; // class Renderbuffer
 
 } // namespace gl
 
-#endif // GLESWRAPPER_PRIMITIVE_H
-
+#endif // GLESWRAPPER_CORE_RENDERBUFFER_H

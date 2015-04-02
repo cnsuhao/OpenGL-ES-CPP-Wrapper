@@ -28,11 +28,11 @@
 // TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
 // USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GLESWRAPPER_UNIFORM_H
-#define GLESWRAPPER_UNIFORM_H
+#ifndef GLESWRAPPER_CORE_UNIFORM_H
+#define GLESWRAPPER_CORE_UNIFORM_H
 
 #include "Predefine.h"
-#include "Object.h"
+#include "core/Object.h"
 
 namespace gl
 {
@@ -56,37 +56,37 @@ namespace gl
       {
         ::glUniform1f(mLoc, v0);
       }
-      
+
       inline void Set(GLfloat v0, GLfloat v1)
       {
         ::glUniform2f(mLoc, v0, v1);
       }
-      
+
       inline void Set(GLfloat v0, GLfloat v1, GLfloat v2)
       {
         ::glUniform3f(mLoc, v0, v1, v2);
       }
-      
+
       inline void Set(GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
       {
         ::glUniform4f(mLoc, v0, v1, v2, v3);
       }
-      
+
       inline void Set(GLint v0)
       {
         ::glUniform1i(mLoc, v0);
       }
-      
+
       inline void Set(GLint v0, GLint v1)
       {
         ::glUniform2i(mLoc, v0, v1);
       }
-      
+
       inline void Set(GLint v0, GLint v1, GLint v2)
       {
         ::glUniform3i(mLoc, v0, v1, v2);
       }
-      
+
       inline void Set(GLint v0, GLint v1, GLint v2, GLfloat v3)
       {
         ::glUniform4i(mLoc, v0, v1, v2, v3);
@@ -96,37 +96,37 @@ namespace gl
       {
         ::glUniform1fv(mLoc, count, v);
       }
-      
+
       inline void Set2v(GLsizei count, const GLfloat* v)
       {
         ::glUniform2fv(mLoc, count, v);
       }
-      
+
       inline void Set3v(GLsizei count, const GLfloat* v)
       {
         ::glUniform3fv(mLoc, count, v);
       }
-      
+
       inline void Set4v(GLsizei count, const GLfloat* v)
       {
         ::glUniform4fv(mLoc, count, v);
       }
-      
+
       inline void Set1v(GLsizei count, const GLint* v)
       {
         ::glUniform1iv(mLoc, count, v);
       }
-      
+
       inline void Set2v(GLsizei count, const GLint* v)
       {
         ::glUniform2iv(mLoc, count, v);
       }
-      
+
       inline void Set3v(GLsizei count, const GLint* v)
       {
         ::glUniform3iv(mLoc, count, v);
       }
-      
+
       inline void Set4v(GLsizei count, const GLint* v)
       {
         ::glUniform4iv(mLoc, count, v);
@@ -136,12 +136,12 @@ namespace gl
       {
         ::glUniformMatrix2fv(mLoc, count, GL_FALSE, v);
       }
-      
+
       inline void SetMatrix3v(GLsizei count, const GLfloat* v)
       {
         ::glUniformMatrix3fv(mLoc, count, GL_FALSE, v);
       }
-      
+
       inline void SetMatrix4v(GLsizei count, const GLfloat* v)
       {
         ::glUniformMatrix4fv(mLoc, count, GL_FALSE, v);
@@ -174,4 +174,4 @@ namespace gl
 
 } // namespace gl
 
-#endif // GLESWRAPPER_UNIFORM_H
+#endif // GLESWRAPPER_CORE_UNIFORM_H
