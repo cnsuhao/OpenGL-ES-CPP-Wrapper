@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="GLES2">
+      <UniqueIdentifier>{8997d0b3-464d-4b70-b442-f9cfc7aefacb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\third\GLESMock\GLES2\gl2.h">
+      <Filter>GLES2</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\third\GLESMock\GLES2\gl2.cpp">
+      <Filter>GLES2</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
