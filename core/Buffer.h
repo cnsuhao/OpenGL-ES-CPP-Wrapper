@@ -41,43 +41,86 @@ namespace gl
   class Buffer : public Object
   {
     public:
+      /**
+       * Construct a Buffer object with the name of value 0
+       */
       Buffer() : Object() {}
 
+      /**
+       * Construct a Buffer object with the name of a specified value
+       *
+       * @param id a specified value for Buffer object's name
+       */
       explicit Buffer(GLuint id) : Object(id) {}
 
       virtual ~Buffer() {}
 
+      /**
+       * Generate a buffer object name
+       *
+       * @see glGenBuffers(GLsizei n, GLuint* buffers)
+       */
       void Generate()
       {
         ::glGenBuffers(1, &mId);
       }
 
+      /**
+       * Delete a named buffer object
+       *
+       * @see glDeleteBuffers(GLsizei n, const GLuint* buffers)
+       */
       void Delete()
       {
         ::glDeleteBuffers(1, &mId);
         mId = 0;
       }
 
+      /**
+       * Bind a named buffer object
+       *
+       * @see glBindBuffer(GLenum target, GLuint buffer)
+       */
       inline void Bind() const
       {
         ::glBindBuffer(target, mId);
       }
 
+      /**
+       * Create and initialize a buffer object's data store
+       *
+       * @see glBufferData(GLenum target, GLsizeiptr size, const GLvoid* data, GLenum usage)
+       */
       inline void SetData(GLsizeiptr size, const GLvoid* data, GLenum usage)
       {
         ::glBufferData(target, size, data, usage);
       }
 
+      /**
+       * Equivalent to call {@link #SetData(size, 0, usage)}
+       *
+       * @see #SetData(GLsizeiptr size, const GLvoid* data, GLenum usage)
+       */
       inline void SetData(GLsizeiptr size, GLenum usage)
       {
         SetData(size, 0, usage);
       }
 
+      /**
+       * Update a subset of a buffer object's data store
+       *
+       * @see glBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, const GLvoid * data)
+       */
       inline void SetSubData(GLintptr offset, GLsizeiptr size, const GLvoid* data)
       {
         ::glBufferSubData(target, offset, size, data);
       }
 
+      /**
+       * Return parameters of a buffer object
+       *
+       * @see glGetBufferParameteriv(GLenum target, GLenum value, GLint* data)
+       */
       inline void GetParameter(GLenum value, GLint* data) const
       {
         ::glGetBufferParameteriv(target, value, data);

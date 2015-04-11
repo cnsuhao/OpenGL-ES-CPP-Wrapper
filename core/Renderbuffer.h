@@ -40,33 +40,66 @@ namespace gl
   class Renderbuffer : public Object
   {
     public:
+      /**
+       * Construct a Renderbuffer object with the name of value 0
+       */
       Renderbuffer() : Object() {}
 
+      /**
+       * Construct a Renderbuffer object with the name of a specified value
+       *
+       * @param id a specified value for Renderbuffer object's name
+       */
       explicit Renderbuffer(GLuint id) : Object(id) {}
 
       virtual ~Renderbuffer() {}
 
+      /**
+       * Generate a Renderbuffer object name
+       *
+       * @see glGenRenderbuffers(GLsizei n, GLuint *renderbuffers)
+       */
       void Generate()
       {
         ::glGenRenderbuffers(1, &mId);
       }
 
+      /**
+       * Delete a named renderbuffer object
+       *
+       * @see glDeleteRenderbuffers(GLsizei n, const GLuint *renderbuffers)
+       */
       void Delete()
       {
         ::glDeleteRenderbuffers(1, &mId);
         mId = 0;
       }
 
+      /**
+       * Bind a named Renderbuffer object
+       *
+       * @see glBindRenderbuffer(GLenum target, GLuint renderbuffer)
+       */
       inline void Bind() const
       {
         ::glBindRenderbuffer(GL_RENDERBUFFER, mId);
       }
 
+      /**
+       * Create and initialize a Renderbuffer object's data store
+       *
+       * @see glRenderbufferStorage(GLenum target, GLenum internalformat, GLsizei width, GLsizei height)
+       */
       inline void SetStorage(GLenum internalformat, GLsizei width, GLsizei height)
       {
         ::glRenderbufferStorage(GL_RENDERBUFFER, internalformat, width, height);
       }
 
+      /**
+       * Return parameters of a renderbuffer object
+       *
+       * @see glGetRenderbufferParameteriv(GLenum target, GLenum pname, GLint *params)
+       */
       inline void GetParameter(GLenum pname, GLint* param) const
       {
         ::glGetRenderbufferParameteriv(GL_RENDERBUFFER, pname, param);

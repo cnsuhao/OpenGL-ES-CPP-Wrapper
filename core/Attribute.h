@@ -42,97 +42,179 @@ namespace gl
     public:
       friend class Program;
 
-      inline static void GetParameter(GLuint index, GLenum pname, GLfloat* params)
-      {
-        ::glGetVertexAttribfv(index, pname, params);
-      }
+      /**
+       * Construct a default Attribute object with index of 0
+       */
+      Attribute() : mIndex(0) {}
 
-      inline static void GetParameter(GLuint index, GLenum pname, GLint* params)
-      {
-        ::glGetVertexAttribiv(index, pname, params);
-      }
+      /**
+       * Construct an Attribute object with the specified index
+       *
+       * @param index the specified index
+       */
+      explicit Attribute(GLuint index) : mIndex(index) {}
 
-      inline static void GetPointer(GLuint index, GLvoid** pointer)
-      {
-        ::glGetVertexAttribPointerv(index, GL_VERTEX_ATTRIB_ARRAY_POINTER, pointer);
-      }
-
-      Attribute() : mLoc(0) {}
-
-      explicit Attribute(GLint loc) : mLoc(loc) {}
-
+      /**
+       * Simplely reset the index to 0
+       */
       virtual ~Attribute()
       {
-        mLoc = 0;
+        mIndex = 0;
       }
 
+      /**
+       * Specify the value of a generic vertex attribute
+       *
+       * @see glVertexAttrib1f(GLuint index, GLfloat x)
+       */
       inline void Set(GLfloat v0)
       {
-        ::glVertexAttrib1f(mLoc, v0);
+        ::glVertexAttrib1f(mIndex, v0);
       }
 
+      /**
+       * Specify the value of a generic vertex attribute
+       *
+       * @see glVertexAttrib2f(GLuint index, GLfloat x, GLfloat y)
+       */
       inline void Set(GLfloat v0, GLfloat v1)
       {
-        ::glVertexAttrib2f(mLoc, v0, v1);
+        ::glVertexAttrib2f(mIndex, v0, v1);
       }
 
+      /**
+       * Specify the value of a generic vertex attribute
+       *
+       * @see glVertexAttrib3f(GLuint index, GLfloat x, GLfloat y, GLfloat z)
+       */
       inline void Set(GLfloat v0, GLfloat v1, GLfloat v2)
       {
-        ::glVertexAttrib3f(mLoc, v0, v1, v2);
+        ::glVertexAttrib3f(mIndex, v0, v1, v2);
       }
 
+      /**
+       * Specify the value of a generic vertex attribute
+       *
+       * @see glVertexAttrib4f(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+       */
       inline void Set(GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
       {
-        ::glVertexAttrib4f(mLoc, v0, v1, v2, v3);
+        ::glVertexAttrib4f(mIndex, v0, v1, v2, v3);
       }
 
+      /**
+       * Specify the value of a generic vertex attribute
+       *
+       * @see glVertexAttrib1fv(GLuint index, const GLfloat *v)
+       */
       inline void Set1v(const GLfloat* v)
       {
-        ::glVertexAttrib1fv(mLoc, v);
+        ::glVertexAttrib1fv(mIndex, v);
       }
 
+      /**
+       * Specify the value of a generic vertex attribute
+       *
+       * @see glVertexAttrib2fv(GLuint index, const GLfloat *v)
+       */
       inline void Set2v(const GLfloat* v)
       {
-        ::glVertexAttrib2fv(mLoc, v);
+        ::glVertexAttrib2fv(mIndex, v);
       }
 
+      /**
+       * Specify the value of a generic vertex attribute
+       *
+       * @see glVertexAttrib3fv(GLuint index, const GLfloat *v)
+       */
       inline void Set3v(const GLfloat* v)
       {
-        ::glVertexAttrib3fv(mLoc, v);
+        ::glVertexAttrib3fv(mIndex, v);
       }
 
+      /**
+       * Specify the value of a generic vertex attribute
+       *
+       * @see glVertexAttrib4fv(GLuint index, const GLfloat *v)
+       */
       inline void Set4v(const GLfloat* v)
       {
-        ::glVertexAttrib4fv(mLoc, v);
+        ::glVertexAttrib4fv(mIndex, v);
       }
 
-      inline void EnableGeneric()
+      /**
+       * Enable a generic vertex attribute array
+       *
+       * @see glEnableVertexAttribArray(GLuint index)
+       */
+      inline void EnableArray()
       {
-        ::glEnableVertexAttribArray(mLoc);
+        ::glEnableVertexAttribArray(mIndex);
       }
 
-      inline void DisableGeneric()
+      /**
+       * Disable a generic vertex attribute array
+       *
+       * @see glDisableVertexAttribArray(GLuint index)
+       */
+      inline void DisableArray()
       {
-        ::glDisableVertexAttribArray(mLoc);
+        ::glDisableVertexAttribArray(mIndex);
       }
 
-      inline void SetPointer(GLint size, GLenum type, bool normalized, GLsizei stride, GLsizeiptr offset)
+      /**
+       * Define an array of generic vertex attribute data
+       *
+       * @see glVertexAttribPointer(GLuint index, GLint size, GLenum type,
+       *      GLboolean normalized, GLsizei stride, const void *pointer)
+       */
+      inline void SetPointer(GLint size, GLenum type, bool normalized, GLsizei stride, const GLvoid* pointer)
       {
-        ::glVertexAttribPointer(mLoc, size, type, normalized, stride, (GLvoid*)offset);
+        ::glVertexAttribPointer(mIndex, size, type, normalized, stride, pointer);
       }
 
-      inline void SetPointer(GLint size, GLenum type, bool normalized, GLsizei stride, const GLvoid* data)
+      /**
+       * Return the index of the generic vertex attribute object
+       *
+       * @see glGenBuffers(GLsizei n, GLuint* buffers)
+       */
+      inline GLuint GetIndex() const
       {
-        ::glVertexAttribPointer(mLoc, size, type, normalized, stride, data);
+        return mIndex;
       }
 
-      inline GLint GetLocation() const
+      /**
+       * Return a generic vertex attribute parameter
+       *
+       * @see glGetVertexAttribfv(GLuint index, GLenum pname, GLfloat *params)
+       */
+      inline void GetParameter(GLenum pname, GLfloat* params)
       {
-        return mLoc;
+        ::glGetVertexAttribfv(mIndex, pname, params);
+      }
+
+      /**
+       * Return a generic vertex attribute parameter
+       *
+       * @see glGetVertexAttribiv(GLuint index, GLenum pname, GLint *params)
+       */
+      inline void GetParameter(GLenum pname, GLint* params)
+      {
+        ::glGetVertexAttribiv(mIndex, pname, params);
+      }
+
+      /**
+       * Return the address of the specified generic vertex attribute pointer
+       *
+       * @see glGetVertexAttribPointerv(GLuint index, GLenum pname, void **pointer)
+       */
+      inline void GetPointer(GLvoid** pointer)
+      {
+        ::glGetVertexAttribPointerv(mIndex, GL_VERTEX_ATTRIB_ARRAY_POINTER, pointer);
       }
 
     protected:
-      GLint mLoc;
+      GLuint mIndex;
   }; // class Attribute
 
 

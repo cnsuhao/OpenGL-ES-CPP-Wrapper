@@ -31,7 +31,13 @@
 #ifndef GLESWRAPPER_PREDEFINE_H
 #define GLESWRAPPER_PREDEFINE_H
 
+#if GLESWRAPPER_USE_GLES31
+#include <GLES3/gl31.h>
+#elif GLESWRAPPER_USE_GLES30
+#include <GLES3/gl3.h>
+#else
 #include <GLES2/gl2.h>
+#endif
 
 #include <string>
 

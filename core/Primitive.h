@@ -40,11 +40,21 @@ namespace gl
   struct Primitive
   {
 
+    /**
+     * Render primitives from array data
+     *
+     * @see glDrawArrays(GLenum mode, GLint first, GLsizei count)
+     */
     inline static void DrawArray(GLint first, GLsizei count)
     {
       ::glDrawArrays(mode, first, count);
     }
 
+    /**
+     * Render primitives from array data
+     *
+     * @see glDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid * indices)
+     */
     inline static void DrawElement(GLsizei count, GLenum type, const GLvoid* index)
     {
       ::glDrawElements(mode, count, type, index);

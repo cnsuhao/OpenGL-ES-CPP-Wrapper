@@ -41,68 +41,137 @@ namespace gl
   class Shader : public Object
   {
     public:
+      /**
+       * Release resources consumed by the implementation's shader compiler
+       *
+       * @see glReleaseShaderCompiler()
+       */
       static void ReleaseCompiler()
       {
         ::glReleaseShaderCompiler();
       }
 
+      /**
+       * Retrieve the range and precision for numeric formats supported by the shader compiler
+       *
+       * @see glGetShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision)
+       */
       static void GetPrecisionFormat(GLenum precisiontype, GLint* range, GLint* precision)
       {
         ::glGetShaderPrecisionFormat(type, precisiontype, range, precision);
       }
 
+      /**
+       * Construct a Shader object with the name of value 0
+       *
+       */
       Shader() : Object() {}
 
+      /**
+       * Construct a Shader object with the name of a specified value
+       *
+       * @param id a specified value for Shader object's name
+       */
       explicit Shader(GLuint id) : Object(id) {}
 
       virtual ~Shader() {}
 
+      /**
+       * Create a shader object
+       *
+       * @see glCreateShader(GLenum type)
+       */
       void Create()
       {
         mId = ::glCreateShader(type);
       }
 
+      /**
+       * Delete a shader object
+       *
+       * @see glDeleteShader(GLuint shader)
+       */
       void Delete()
       {
         ::glDeleteShader(mId);
         mId = 0;
       }
 
+      /**
+       * Replace the source code in a shader object
+       *
+       * @see glShaderSource(GLuint shader, GLsizei count, const GLchar *const*string, const GLint *length)
+       */
       inline void SetSource(GLsizei count, const GLchar** sources, const GLint* length)
       {
         ::glShaderSource(mId, count, sources, length);
       }
 
+      /**
+       * Equivalent to call <code>SetSource(count, sources, 0)</code>
+       *
+       * @see #SetSource(GLsizei count, const GLchar** sources, const GLint* length)
+       */
       inline void SetSource(GLsizei count, const GLchar** sources)
       {
         SetSource(count, sources, 0);
       }
 
+      /**
+       * Equivalent to call <code>SetSource(1, &source)</code>
+       *
+       * @see #SetSource(GLsizei count, const GLchar** sources)
+       */
       inline void SetSource(const GLchar* source)
       {
         SetSource(1, &source);
       }
 
+      /**
+       * Load pre-compiled shader binaries
+       *
+       * @see glShaderBinary(GLsizei count, const GLuint *shaders, GLenum binaryformat, const void *binary, GLsizei length)
+       */
       inline void SetBinary(GLsizei count, const GLuint* shader, GLenum binaryformat, const GLvoid* data, GLsizei length)
       {
         ::glShaderBinary(count, shader, binaryformat, data, length);
       }
 
+      /**
+       * Compile a shader object
+       *
+       * @see glCompileShader(GLuint shader)
+       */
       inline void Compile()
       {
         ::glCompileShader(mId);
       }
 
+      /**
+       * Return a parameter from a shader object
+       *
+       * @see glGetShaderiv(GLuint shader, GLenum pname, GLint *params)
+       */
       inline void GetParameter(GLenum pname, GLint* param) const
       {
         ::glGetShaderiv(mId, pname, param);
       }
 
+      /**
+       * Return the information log for a shader object
+       *
+       * @see glGetShaderInfoLog(GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog)
+       */
       inline void GetInfoLog(GLsizei bufsize, GLsizei* length, GLchar* infolog) const
       {
         ::glGetShaderInfoLog(mId, bufsize, length, infolog);
       }
 
+      /**
+       * Return the source code string from a shader object
+       *
+       * @see glGetShaderSource(GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *source)
+       */
       inline void GetSource(GLsizei bufSize, GLsizei* length, GLchar* source) const
       {
         ::glGetShaderSource(mId, bufSize, length, source);

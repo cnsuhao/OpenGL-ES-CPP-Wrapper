@@ -28,52 +28,9 @@
 // TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
 // USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GLESWRAPPER_CORE_OBJECT_H
-#define GLESWRAPPER_CORE_OBJECT_H
+#include <GLESWrapper.h>
 
-#include "Predefine.h"
-
-namespace gl
+int main(int argc, char* argv[])
 {
-
-  class Object
-  {
-    public:
-      /**
-       * Construct a default Object object with name (or id) of 0
-       */
-      Object() : mId(0) {}
-
-      /**
-       * Construct a Object object with the specified name (or id)
-       *
-       * @param id the id to set
-       */
-      explicit Object(GLuint id) : mId(id) {}
-
-      /**
-       * Simplely reset the name (or id) to 0
-       */
-      virtual ~Object()
-      {
-        mId = 0;
-      }
-
-      /**
-       * Return the name (or id) of the Object object
-       *
-       * @return the name of the Object object
-       */
-      inline GLuint GetId() const
-      {
-        return mId;
-      }
-
-    protected:
-      GLuint mId;
-  }; // class Object
-
-} // namespace gl
-
-#endif // GLESWRAPPER_CORE_OBJECT_H
-
+  return 0;
+}
